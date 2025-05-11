@@ -7,7 +7,7 @@ public class Showtime {
     private final String screen;
     private final LocalDate date;
     private final String language;
-    private String format; // 2D, 3D, etc.
+    private final String format; // 2D, 3D, etc.
 
     private Showtime(Builder builder) {
         this.movie = builder.movie;

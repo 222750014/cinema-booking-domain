@@ -2,20 +2,20 @@ package za.co.cinemabookingdomain.Domain;
 import java.time.LocalTime;
 
 public class Payment {
-    private final String  paymentMethod;
-    private final int transactionID;
+    private final String paymentId;
+    private final String paymentMethod;
     private final double amount;
     private final LocalTime time;
 
-    private Payment(Builder builder) {
+    public Payment(Builder builder) {
         this.paymentMethod = builder.paymentMethod;
-        this.transactionID = builder.transactionID;
+        this.paymentId = builder.paymentId;
         this.amount = builder.amount;
         this.time = builder.time;
     }
 
-    public int getTransactionID() {
-        return transactionID;
+    public String getPaymentId() {
+        return paymentId;
     }
 
     public String getPaymentMethod() {
@@ -34,15 +34,15 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "paymentMethod='" + paymentMethod + '\'' +
-                ", transactionID=" + transactionID +
+                ", PaymentId=" + paymentId +
                 ", amount=" + amount +
                 ", time=" + time +
                 '}';
     }
 
     public static class Builder {
-        private  String  paymentMethod;
-        private int transactionID;
+        private String paymentId;
+        private String paymentMethod;
         private double amount;
         private LocalTime time;
 
@@ -51,12 +51,12 @@ public class Payment {
             return this;
         }
 
-        public Builder setTransactionID(int transactionID) {
-            this.transactionID = transactionID;
+        public Builder setPaymentId(String paymentId) {
+            this.paymentId = paymentId;
             return this;
         }
 
-        public  Builder setAmount(double amount) {
+        public Builder setAmount(double amount) {
             this.amount = amount;
             return this;
         }
@@ -65,11 +65,12 @@ public class Payment {
             this.time = time;
             return this;
         }
+
         public Builder copy(Payment payment) {
+            this.paymentId = payment.paymentId;
             this.paymentMethod = payment.paymentMethod;
-            this.transactionID = payment.transactionID;
             this.amount = payment.amount;
-            this.time =payment.time;
+            this.time = payment.time;
             return this;
         }
 
@@ -77,8 +78,5 @@ public class Payment {
             return new Payment(this);
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 42ad78a36cc113440a47ac09430f7d95b4394533
+

@@ -57,6 +57,10 @@ public class Screen {
             return new Screen(this);
         }
     }
+<<<<<<< HEAD
+}
+=======
 }
 
 
+>>>>>>> 42ad78a36cc113440a47ac09430f7d95b4394533

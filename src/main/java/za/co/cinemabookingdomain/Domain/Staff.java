@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> 42ad78a36cc113440a47ac09430f7d95b4394533
 package za.co.cinemabookingdomain.Domain;
 
 public class Staff {
@@ -65,4 +69,7 @@ public class Staff {
                 '}';
     }
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 42ad78a36cc113440a47ac09430f7d95b4394533

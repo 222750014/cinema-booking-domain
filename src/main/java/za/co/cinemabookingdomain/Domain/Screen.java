@@ -38,17 +38,17 @@ public class Screen {
         private int capacity;
         private int screenNumber;
 
-        public Builder setType(String type) {
+        public Builder setType() {
             this.type = type;
             return this;
         }
 
-        public Builder setCapacity(int capacity) {
+        public Builder setCapacity() {
             this.capacity = capacity;
             return this;
         }
 
-        public Builder setScreenNumber(int screenNumber) {
+        public Builder setScreenNumber() {
             this.screenNumber = screenNumber;
             return this;
         }
@@ -57,10 +57,9 @@ public class Screen {
             return new Screen(this);
         }
     }
-<<<<<<< HEAD
-}
-=======
+
 }
 
 
->>>>>>> 42ad78a36cc113440a47ac09430f7d95b4394533
+
+

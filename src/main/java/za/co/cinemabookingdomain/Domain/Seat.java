@@ -72,4 +72,3 @@ public class Seat {
         public Seat build() {return new Seat(this);}
     }
 }
-

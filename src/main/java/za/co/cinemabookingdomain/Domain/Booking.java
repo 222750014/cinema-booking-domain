@@ -3,6 +3,7 @@ Booking POJO class
 Author: VR Ramncwana (220618534)
 Date: 11 May 2025
  */
+
 package za.co.cinemabookingdomain.Domain;
 
 public class Booking {

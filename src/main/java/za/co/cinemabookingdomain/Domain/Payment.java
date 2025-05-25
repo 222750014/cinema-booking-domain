@@ -1,13 +1,21 @@
 package za.co.cinemabookingdomain.Domain;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.time.LocalTime;
 
+@Entity
 public class Payment {
-    private final String paymentId;
-    private final String paymentMethod;
-    private final double amount;
-    private final LocalTime time;
+    @Id
+    private String paymentId;
+    private String paymentMethod;
+    private double amount;
+    private LocalTime time;
 
-    public Payment(Builder builder) {
+    public Payment(){}
+
+
+    private Payment(Builder builder) {
         this.paymentMethod = builder.paymentMethod;
         this.paymentId = builder.paymentId;
         this.amount = builder.amount;

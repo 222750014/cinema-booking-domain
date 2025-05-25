@@ -1,13 +1,20 @@
 package za.co.cinemabookingdomain.Domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.time.LocalDate;
 
+@Entity
 public class Showtime {
-    private final String movie;
-    private final String screen;
-    private final LocalDate date;
-    private final String language;
-    private final String format; // 2D, 3D, etc.
+    @Id
+    private  String movie;
+    private  String screen;
+    private  LocalDate date;
+    private  String language;
+    private  String format; // 2D, 3D, etc.
+
+    public Showtime(){}
 
     private Showtime(Builder builder) {
         this.movie = builder.movie;

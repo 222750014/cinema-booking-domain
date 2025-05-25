@@ -5,7 +5,7 @@ import za.co.cinemabookingdomain.Domain.Showtime;
 import java.time.LocalDate;
 
 public class ShowtimeFactory {
-    public static Showtime CreateShowtime(String movie, String screen, LocalDate date, String format, String language){
+    public static Showtime createShowtime(String movie, String screen, LocalDate date, String format, String language){
         if (movie == null || movie.isEmpty()) {
             return null;
         }

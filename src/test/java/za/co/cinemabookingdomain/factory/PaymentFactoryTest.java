@@ -16,6 +16,10 @@ public class PaymentFactoryTest {
         assertEquals("Debitcard", payment.getPaymentMethod());
         assertEquals(200.00, payment.getAmount());
         assertEquals(time, payment.getTime());
+        System.out.println("Created Payment: " + payment);
+
+
+
 
     }
 

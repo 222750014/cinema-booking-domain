@@ -1,3 +1,9 @@
+/*CustomerFactory.java
+CustomerFactory POJO class
+Author: EP Posholi (222144408)
+Date: 25 May 2025
+ */
+
 package za.co.cinemabookingdomain.factory;
 
 import za.co.cinemabookingdomain.Domain.Customer;

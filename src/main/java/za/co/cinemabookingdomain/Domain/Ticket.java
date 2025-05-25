@@ -64,7 +64,9 @@ public class Ticket {
         public Ticket build() {
             return new Ticket(this);
         }
+
+        public Screen.Builder setMovieName() {
+            return new Screen.Builder(this);
+        }
     }
-
 }
-

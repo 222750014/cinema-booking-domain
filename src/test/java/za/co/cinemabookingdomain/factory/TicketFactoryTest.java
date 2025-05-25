@@ -1,6 +1,8 @@
 package za.co.cinemabookingdomain.factory;
 
 import org.junit.jupiter.api.Test;
+import za.co.cinemabookingdomain.Domain.Ticket;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TicketFactoryTest {

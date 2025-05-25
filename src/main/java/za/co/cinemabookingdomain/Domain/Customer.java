@@ -1,22 +1,41 @@
 package za.co.cinemabookingdomain.Domain;
 
-/*
-Author Emmanuel Posholi 222144408
-Date: 11 May 2025
- */
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Customer {
 
-    private final String name;
-    private final String email;
-    private final String phone;
-    private final Integer loyaltyPoints; // Optional
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    private String phone;
+    private Integer loyaltyPoints;
+
+    // TODO: Uncomment when Booking entity is created by team member
+    // @One-To-Many(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // private List<Booking> bookings = new ArrayList<>();
+
+    protected Customer() {}
 
     private Customer(Builder builder) {
         this.name = builder.name;
         this.email = builder.email;
         this.phone = builder.phone;
         this.loyaltyPoints = builder.loyaltyPoints;
+    }
+
+    // Getters
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -34,6 +53,41 @@ public class Customer {
     public Integer getLoyaltyPoints() {
         return loyaltyPoints;
     }
+
+    // Setters (Added for update logic)
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setLoyaltyPoints(Integer loyaltyPoints) {
+        this.loyaltyPoints = loyaltyPoints;
+    }
+
+    // TODO: Uncomment when Booking entity is created
+    /*
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    // Helper methods for managing relationships
+    public void addBooking(Booking booking) {
+        bookings.add(booking);
+        booking.setCustomer(this);
+    }
+
+    public void removeBooking(Booking booking) {
+        bookings.remove(booking);
+        booking.setCustomer(null);
+    }
+    */
 
     public static class Builder {
         private String name;
@@ -61,14 +115,6 @@ public class Customer {
             return this;
         }
 
-        public Builder copy(Customer customer) {
-            this.name = customer.getName();
-            this.email = customer.getEmail();
-            this.phone = customer.getPhone();
-            this.loyaltyPoints = customer.getLoyaltyPoints();
-            return this;
-        }
-
         public Customer build() {
             return new Customer(this);
         }
@@ -77,10 +123,12 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", loyaltyPoints=" + (loyaltyPoints != null ? loyaltyPoints : "N/A") +
+                ", loyaltyPoints=" + loyaltyPoints +
+                ", bookingsCount=" + 0 +
                 '}';
     }
 }

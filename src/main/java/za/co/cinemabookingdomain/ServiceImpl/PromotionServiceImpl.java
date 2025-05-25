@@ -1,3 +1,9 @@
+/*Customer.java
+Customer POJO class
+Author: EP Posholi (222144408)
+Date: 25 May 2025
+ */
+
 package za.co.cinemabookingdomain.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;

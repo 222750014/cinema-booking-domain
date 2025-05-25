@@ -7,7 +7,7 @@ package za.co.cinemabookingdomain.Domain;
 public class Screen {
     private String type;
     private int capacity;
-    private int screenNumber;  //
+    private int screenNumber;
 
     private Screen(Builder builder) {
         this.type = builder.type;
@@ -32,23 +32,29 @@ public class Screen {
         return "Screen Type: " + type + ", Capacity: " + capacity + ", Screen Number: " + screenNumber;
     }
 
-
     public static class Builder {
         private String type;
         private int capacity;
         private int screenNumber;
 
-        public Builder setType() {
+        public Builder(Ticket.Builder builder) {
+        }
+
+        public Builder() {
+
+        }
+
+        public Builder setType(String type) {
             this.type = type;
             return this;
         }
 
-        public Builder setCapacity() {
+        public Builder setCapacity(int capacity) {
             this.capacity = capacity;
             return this;
         }
 
-        public Builder setScreenNumber() {
+        public Builder setScreenNumber(int screenNumber) {
             this.screenNumber = screenNumber;
             return this;
         }
@@ -57,9 +63,4 @@ public class Screen {
             return new Screen(this);
         }
     }
-
 }
-
-
-
-

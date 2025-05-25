@@ -1,44 +1,151 @@
-package za.co.cinemabookingdomain.Domain;
-
-
-/*
-Author Emmanuel Posholi 222144408
-Date: 11 May 2025
+/*Promotion.java
+Promotion POJO class
+Author: EP Posholi (222144408)
+Date: 25 May 2025
  */
 
+package za.co.cinemabookingdomain.Domain;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+@Entity
 public class Promotion {
-    private final String discountCode;
-    private final String description;
-    private final LocalDate validity;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String promotionCode;
+
+    @Column(nullable = false)
+    private String name;
+
+    private String description;
+
+    @Column(nullable = false)
+    private BigDecimal discountPercentage;
+
+    private BigDecimal discountAmount;
+
+    @Column(nullable = false)
+    private LocalDateTime startDate;
+
+    @Column(nullable = false)
+    private LocalDateTime endDate;
+
+    private Integer maxUsageCount;
+    private Integer currentUsageCount = 0;
+    private Boolean isActive = true;
+
+    protected Promotion() {}
 
     private Promotion(Builder builder) {
-        this.discountCode = builder.discountCode;
+        this.promotionCode = builder.promotionCode;
+        this.name = builder.name;
         this.description = builder.description;
-        this.validity = builder.validity;
+        this.discountPercentage = builder.discountPercentage;
+        this.discountAmount = builder.discountAmount;
+        this.startDate = builder.startDate;
+        this.endDate = builder.endDate;
+        this.maxUsageCount = builder.maxUsageCount;
+        this.currentUsageCount = builder.currentUsageCount;
+        this.isActive = builder.isActive;
     }
 
-    public String getDiscountCode() {
-        return discountCode;
+
+    public Long getId() { return id; }
+    public String getPromotionCode() { return promotionCode; }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public BigDecimal getDiscountPercentage() { return discountPercentage; }
+    public BigDecimal getDiscountAmount() { return discountAmount; }
+    public LocalDateTime getStartDate() { return startDate; }
+    public LocalDateTime getEndDate() { return endDate; }
+    public Integer getMaxUsageCount() { return maxUsageCount; }
+    public Integer getCurrentUsageCount() { return currentUsageCount; }
+    public Boolean getIsActive() { return isActive; }
+
+
+    public void setPromotionCode(String promotionCode) {
+        this.promotionCode = promotionCode;
     }
 
-    public String getDescription() {
-        return description;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public LocalDate getValidity() {
-        return validity;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public void setDiscountPercentage(BigDecimal discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public void setDiscountAmount(BigDecimal discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setMaxUsageCount(Integer maxUsageCount) {
+        this.maxUsageCount = maxUsageCount;
+    }
+
+    public void setCurrentUsageCount(Integer currentUsageCount) {
+        this.currentUsageCount = currentUsageCount;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
+
+    public void incrementUsageCount() {
+        if (currentUsageCount != null) currentUsageCount++;
+    }
+
+    public void decrementUsageCount() {
+        if (currentUsageCount != null && currentUsageCount > 0) currentUsageCount--;
+    }
+
+    public boolean isValidForUse() {
+        LocalDateTime now = LocalDateTime.now();
+        return isActive != null && isActive &&
+                now.isAfter(startDate) &&
+                now.isBefore(endDate) &&
+                (maxUsageCount == null || currentUsageCount < maxUsageCount);
+    }
+
 
     public static class Builder {
-        private String discountCode;
+        private String promotionCode;
+        private String name;
         private String description;
-        private LocalDate validity;
+        private BigDecimal discountPercentage;
+        private BigDecimal discountAmount;
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
+        private Integer maxUsageCount;
+        private Integer currentUsageCount = 0;
+        private Boolean isActive = true;
 
-        public Builder setDiscountCode(String discountCode) {
-            this.discountCode = discountCode;
+        public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
             return this;
         }
 
@@ -47,15 +154,38 @@ public class Promotion {
             return this;
         }
 
-        public Builder setValidity(LocalDate validity) {
-            this.validity = validity;
+        public Builder setDiscountPercentage(BigDecimal discountPercentage) {
+            this.discountPercentage = discountPercentage;
             return this;
         }
 
-        public Builder copy(Promotion promotion) {
-            this.discountCode = promotion.getDiscountCode();
-            this.description = promotion.getDescription();
-            this.validity = promotion.getValidity();
+        public Builder setDiscountAmount(BigDecimal discountAmount) {
+            this.discountAmount = discountAmount;
+            return this;
+        }
+
+        public Builder setStartDate(LocalDateTime startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public Builder setEndDate(LocalDateTime endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public Builder setMaxUsageCount(Integer maxUsageCount) {
+            this.maxUsageCount = maxUsageCount;
+            return this;
+        }
+
+        public Builder setCurrentUsageCount(Integer currentUsageCount) {
+            this.currentUsageCount = currentUsageCount;
+            return this;
+        }
+
+        public Builder setIsActive(Boolean isActive) {
+            this.isActive = isActive;
             return this;
         }
 
@@ -67,9 +197,17 @@ public class Promotion {
     @Override
     public String toString() {
         return "Promotion{" +
-                "discountCode='" + discountCode + '\'' +
+                "id=" + id +
+                ", promotionCode='" + promotionCode + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", validity=" + validity +
+                ", discountPercentage=" + discountPercentage +
+                ", discountAmount=" + discountAmount +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", maxUsageCount=" + maxUsageCount +
+                ", currentUsageCount=" + currentUsageCount +
+                ", isActive=" + isActive +
                 '}';
     }
 }

@@ -4,15 +4,34 @@ package za.co.cinemabookingdomain.Domain;
 222875437
 
  */
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
 public class Screen {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String type;
     private int capacity;
     private int screenNumber;
+
+    protected Screen() {
+    }
+
 
     private Screen(Builder builder) {
         this.type = builder.type;
         this.capacity = builder.capacity;
         this.screenNumber = builder.screenNumber;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public int getCapacity() {

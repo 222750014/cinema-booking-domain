@@ -1,21 +1,38 @@
 package za.co.cinemabookingdomain.Domain;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 /*
 Vuyolwethu Piyo
 222875437
  */
 
+@Entity
 public class Ticket {
-    private final String movieName;
-    private final int screenNumber;
-    private final int seatNumber;
-    private final String bookingStatus;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String movieName;
+    private int screenNumber;
+    private int seatNumber;
+    private String bookingStatus;
+
+    protected Ticket() {
+    }
+
 
     private Ticket(Builder builder) {
         this.movieName = builder.movieName;
         this.screenNumber = builder.screenNumber;
         this.seatNumber = builder.seatNumber;
         this.bookingStatus = builder.bookingStatus;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getMovieName() {

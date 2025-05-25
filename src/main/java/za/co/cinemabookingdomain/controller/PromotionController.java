@@ -1,3 +1,9 @@
+/*PromotionController.java
+PromotionController POJO class
+Author: EP Posholi (222144408)
+Date: 25 May 2025
+ */
+
 package za.co.cinemabookingdomain.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;

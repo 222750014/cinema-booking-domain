@@ -1,3 +1,8 @@
+/*CustomerControllerTest.java
+CustomerControllerTest POJO class
+Author: EP Posholi (222144408)
+Date: 25 May 2025
+ */
 package za.co.cinemabookingdomain.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

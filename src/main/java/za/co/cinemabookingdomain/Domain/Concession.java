@@ -1,6 +1,10 @@
 package za.co.cinemabookingdomain.Domain;
 
+import org.hibernate.AssertionFailure;
+import org.junit.jupiter.api.AssertionFailureBuilder;
+
 public class Concession {
+    private String id;
     private final String itemName;
     private final double price;
     private final int availableQuantity;
@@ -23,10 +27,15 @@ public class Concession {
         return availableQuantity;
     }
 
+    public String getId(String id) {
+        return this.id;
+    }
+
     public static class Builder {
         private String itemName;
         private double price;
         private int availableQuantity;
+        private String id;
 
         public Builder setItemName(String itemName) {
             this.itemName = itemName;
@@ -53,6 +62,20 @@ public class Concession {
         public Concession build() {
 
             return new Concession(this);
+        }
+
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public AssertionFailureBuilder setQuantityAvailable(int i) {
+            return null;
+
         }
     }
 

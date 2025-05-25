@@ -1,6 +1,12 @@
+/*Customer.java
+Customer POJO class
+Author: EP Posholi (222144408)
+Date: 25 May 2025
+ */
+
 package za.co.cinemabookingdomain.Service;
 
-import za.co.cinemabookingdomain.Domain.Promotion; // Changed to 'domain'
+import za.co.cinemabookingdomain.Domain.Promotion; 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

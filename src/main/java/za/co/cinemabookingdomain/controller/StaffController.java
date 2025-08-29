@@ -3,8 +3,8 @@ package za.co.cinemabookingdomain.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.co.cinemabookingdomain.Domain.Staff;
-import za.co.cinemabookingdomain.Service.IStaffService;
+import za.co.cinemabookingdomain.domain.Staff;
+import za.co.cinemabookingdomain.service.IStaffService;
 
 import java.util.List;
 

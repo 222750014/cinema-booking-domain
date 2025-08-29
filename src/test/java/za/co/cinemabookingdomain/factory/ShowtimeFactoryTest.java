@@ -1,7 +1,7 @@
 package za.co.cinemabookingdomain.factory;
 
 import org.junit.jupiter.api.Test;
-import za.co.cinemabookingdomain.Domain.Showtime;
+import za.co.cinemabookingdomain.domain.Showtime;
 
 import java.time.LocalDate;
 import java.time.Month;

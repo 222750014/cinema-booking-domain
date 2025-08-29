@@ -1,6 +1,6 @@
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Ticket;
+import za.co.cinemabookingdomain.domain.Ticket;
 
 public class TicketFactory {
     public static Ticket CreateTicket(String movieName, int screenNumber, int seatNumber, String bookingStatus) {

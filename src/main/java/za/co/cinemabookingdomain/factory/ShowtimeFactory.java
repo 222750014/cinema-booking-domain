@@ -1,6 +1,6 @@
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Showtime;
+import za.co.cinemabookingdomain.domain.Showtime;
 
 import java.time.LocalDate;
 

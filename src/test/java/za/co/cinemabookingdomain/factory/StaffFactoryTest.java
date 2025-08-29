@@ -1,7 +1,7 @@
 package za.co.cinemabookingdomain.factory;
 
 import org.junit.jupiter.api.Test;
-import za.co.cinemabookingdomain.Domain.Staff;
+import za.co.cinemabookingdomain.domain.Staff;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,9 +1,9 @@
 package za.co.cinemabookingdomain.ServiceImpl;
 
 import org.springframework.stereotype.Service;
-import za.co.cinemabookingdomain.Domain.Ticket;
-import za.co.cinemabookingdomain.Repository.TicketRepository;
-import za.co.cinemabookingdomain.Service.TicketService;
+import za.co.cinemabookingdomain.domain.Ticket;
+import za.co.cinemabookingdomain.repository.TicketRepository;
+import za.co.cinemabookingdomain.service.TicketService;
 
 import java.util.List;
 import java.util.Optional;

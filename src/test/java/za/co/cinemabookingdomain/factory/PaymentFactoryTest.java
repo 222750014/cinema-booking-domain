@@ -1,6 +1,6 @@
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Payment;
+import za.co.cinemabookingdomain.domain.Payment;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalTime;

@@ -1,8 +1,8 @@
 package za.co.cinemabookingdomain.ServiceImpl;
 
 import org.junit.jupiter.api.Test;
-import za.co.cinemabookingdomain.Domain.Showtime;
-import za.co.cinemabookingdomain.Service.IShowtimeService;
+import za.co.cinemabookingdomain.domain.Showtime;
+import za.co.cinemabookingdomain.service.IShowtimeService;
 
 import java.time.LocalDate;
 import java.time.Month;

@@ -6,11 +6,10 @@ Date: 25 May 2025
 
 package za.co.cinemabookingdomain.util;
 
-import za.co.cinemabookingdomain.Domain.Customer;
-import za.co.cinemabookingdomain.Domain.Promotion;
+import za.co.cinemabookingdomain.domain.Customer;
+import za.co.cinemabookingdomain.domain.Promotion;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

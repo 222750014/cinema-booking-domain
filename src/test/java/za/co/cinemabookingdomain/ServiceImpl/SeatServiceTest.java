@@ -3,7 +3,7 @@ package za.co.cinemabookingdomain.ServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.co.cinemabookingdomain.Domain.Seat;
+import za.co.cinemabookingdomain.domain.Seat;
 import za.co.cinemabookingdomain.factory.SeatFactory;
 
 import java.util.List;

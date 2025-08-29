@@ -13,8 +13,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import za.co.cinemabookingdomain.Domain.Customer;
-import za.co.cinemabookingdomain.Service.CustomerService;
+import za.co.cinemabookingdomain.domain.Customer;
+import za.co.cinemabookingdomain.service.CustomerService;
 import za.co.cinemabookingdomain.factory.CustomerFactory;
 
 import java.util.Arrays;

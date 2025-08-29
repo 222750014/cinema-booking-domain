@@ -2,9 +2,9 @@ package za.co.cinemabookingdomain.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.co.cinemabookingdomain.Domain.Showtime;
-import za.co.cinemabookingdomain.Repository.ShowtimeRepository;
-import za.co.cinemabookingdomain.Service.IShowtimeService;
+import za.co.cinemabookingdomain.domain.Showtime;
+import za.co.cinemabookingdomain.repository.ShowtimeRepository;
+import za.co.cinemabookingdomain.service.IShowtimeService;
 
 import java.util.List;
 

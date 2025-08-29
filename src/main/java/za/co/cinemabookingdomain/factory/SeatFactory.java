@@ -9,7 +9,7 @@ Date: 18 May 2025
 
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Seat;
+import za.co.cinemabookingdomain.domain.Seat;
 import za.co.cinemabookingdomain.util.Helper;
 
 public class SeatFactory {

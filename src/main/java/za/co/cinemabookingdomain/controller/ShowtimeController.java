@@ -3,8 +3,8 @@ package za.co.cinemabookingdomain.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.co.cinemabookingdomain.Domain.Showtime;
-import za.co.cinemabookingdomain.Service.IShowtimeService;
+import za.co.cinemabookingdomain.domain.Showtime;
+import za.co.cinemabookingdomain.service.IShowtimeService;
 
 import java.util.List;
 

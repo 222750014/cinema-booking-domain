@@ -1,6 +1,6 @@
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Payment;
+import za.co.cinemabookingdomain.domain.Payment;
 
 import java.time.LocalTime;
 

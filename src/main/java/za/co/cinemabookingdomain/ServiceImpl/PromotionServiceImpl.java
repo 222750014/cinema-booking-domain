@@ -9,9 +9,9 @@ package za.co.cinemabookingdomain.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import za.co.cinemabookingdomain.Domain.Promotion;
-import za.co.cinemabookingdomain.Repository.PromotionRepository;
-import za.co.cinemabookingdomain.Service.PromotionService;
+import za.co.cinemabookingdomain.domain.Promotion;
+import za.co.cinemabookingdomain.repository.PromotionRepository;
+import za.co.cinemabookingdomain.service.PromotionService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

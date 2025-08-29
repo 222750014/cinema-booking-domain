@@ -2,9 +2,9 @@ package za.co.cinemabookingdomain.ServiceImpl;
 
 
 import org.springframework.stereotype.Service;
-import za.co.cinemabookingdomain.Domain.Payment;
-import za.co.cinemabookingdomain.Repository.PaymentRepository;
-import za.co.cinemabookingdomain.Service.IPaymentService;
+import za.co.cinemabookingdomain.domain.Payment;
+import za.co.cinemabookingdomain.repository.PaymentRepository;
+import za.co.cinemabookingdomain.service.IPaymentService;
 
 import java.util.List;
 

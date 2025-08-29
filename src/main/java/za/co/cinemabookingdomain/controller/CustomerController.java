@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.co.cinemabookingdomain.Domain.Customer;
-import za.co.cinemabookingdomain.Service.CustomerService;
+import za.co.cinemabookingdomain.domain.Customer;
+import za.co.cinemabookingdomain.service.CustomerService;
 
 import java.util.List;
 import java.util.Optional;

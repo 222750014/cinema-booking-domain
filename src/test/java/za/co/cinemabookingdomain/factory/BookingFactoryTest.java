@@ -2,7 +2,7 @@ package za.co.cinemabookingdomain.factory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import za.co.cinemabookingdomain.Domain.Booking;
+import za.co.cinemabookingdomain.domain.Booking;
 
 import static org.junit.jupiter.api.Assertions.*;
 class BookingFactoryTest {

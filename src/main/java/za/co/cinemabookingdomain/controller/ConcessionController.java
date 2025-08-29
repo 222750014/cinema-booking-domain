@@ -3,8 +3,8 @@ package za.co.cinemabookingdomain.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.co.cinemabookingdomain.Domain.Concession;
-import za.co.cinemabookingdomain.Service.IConcessionService;
+import za.co.cinemabookingdomain.domain.Concession;
+import za.co.cinemabookingdomain.service.IConcessionService;
 
 import java.util.List;
 

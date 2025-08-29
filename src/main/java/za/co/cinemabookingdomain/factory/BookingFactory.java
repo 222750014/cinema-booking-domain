@@ -7,7 +7,7 @@ Date: 18 May 2025
 
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Booking;
+import za.co.cinemabookingdomain.domain.Booking;
 import za.co.cinemabookingdomain.util.Helper;
 
 public class BookingFactory {

@@ -5,7 +5,7 @@ Date: 25 May 2025
  */
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Promotion;
+import za.co.cinemabookingdomain.domain.Promotion;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

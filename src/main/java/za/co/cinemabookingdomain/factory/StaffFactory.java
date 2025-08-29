@@ -1,6 +1,6 @@
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Staff;
+import za.co.cinemabookingdomain.domain.Staff;
 
 public class StaffFactory {
 

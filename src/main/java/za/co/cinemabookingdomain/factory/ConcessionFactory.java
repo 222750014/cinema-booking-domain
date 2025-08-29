@@ -1,12 +1,12 @@
 package za.co.cinemabookingdomain.factory;
 
-import za.co.cinemabookingdomain.Domain.Concession;
-import java.util.UUID;
+import za.co.cinemabookingdomain.domain.Concession;
 
 public class ConcessionFactory {
-    public static Concession createConcession(String itemName, double price, int quantityAvailable) {
+
+    public static Concession createConcession(String itemName, double price, int quantityAvailable, String id) {
         return new Concession.Builder()
-                .setId(UUID.randomUUID().toString())
+                .setId(id)
                 .setItemName(itemName)
                 .setPrice(price)
                 .setQuantityAvailable(quantityAvailable)

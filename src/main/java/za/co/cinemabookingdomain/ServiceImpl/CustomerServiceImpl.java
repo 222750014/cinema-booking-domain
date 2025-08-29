@@ -10,9 +10,9 @@ package za.co.cinemabookingdomain.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import za.co.cinemabookingdomain.Domain.Customer;
-import za.co.cinemabookingdomain.Repository.CustomerRepository;
-import za.co.cinemabookingdomain.Service.CustomerService;
+import za.co.cinemabookingdomain.domain.Customer;
+import za.co.cinemabookingdomain.repository.CustomerRepository;
+import za.co.cinemabookingdomain.service.CustomerService;
 
 import java.util.List;
 import java.util.Optional;

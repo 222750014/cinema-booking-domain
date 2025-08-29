@@ -4,8 +4,8 @@ package za.co.cinemabookingdomain.ServiceImpl;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import za.co.cinemabookingdomain.Domain.Payment;
-import za.co.cinemabookingdomain.Service.IPaymentService;
+import za.co.cinemabookingdomain.domain.Payment;
+import za.co.cinemabookingdomain.service.IPaymentService;
 import za.co.cinemabookingdomain.factory.PaymentFactory;
 
 import java.time.LocalTime;

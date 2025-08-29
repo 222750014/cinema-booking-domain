@@ -1,7 +1,7 @@
 package za.co.cinemabookingdomain.factory;
 
 import org.junit.jupiter.api.Test;
-import za.co.cinemabookingdomain.Domain.Concession;
+import za.co.cinemabookingdomain.domain.Concession;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,13 +12,13 @@ class ConcessionTest {
         Concession concession = new Concession.Builder()
                 .setItemName("Popcorn")
                 .setPrice(45.00)
-                .setAvailableQuantity(100)
+                .setQuantityAvailable(100)
                 .build();
 
         assertNotNull(concession);
         assertEquals("Popcorn", concession.getItemName());
         assertEquals(45.00, concession.getPrice());
-        assertEquals(100, concession.getAvailableQuantity());
+        assertEquals(100, concession.getQuantityAvailable());
 
         System.out.println("Concession created: " + concession);
     }
@@ -28,9 +28,10 @@ class ConcessionTest {
         Concession original = new Concession.Builder()
                 .setItemName("Soda")
                 .setPrice(30.00)
-                .setAvailableQuantity(50)
+                .setQuantityAvailable(50)
                 .build();
 
+        // Added a copy() method inside Builder (see note below)
         Concession copy = new Concession.Builder()
                 .copy(original)
                 .build();
@@ -38,7 +39,7 @@ class ConcessionTest {
         assertNotNull(copy);
         assertEquals(original.getItemName(), copy.getItemName());
         assertEquals(original.getPrice(), copy.getPrice());
-        assertEquals(original.getAvailableQuantity(), copy.getAvailableQuantity());
+        assertEquals(original.getQuantityAvailable(), copy.getQuantityAvailable());
 
         System.out.println("Copied Concession: " + copy);
     }
@@ -48,11 +49,10 @@ class ConcessionTest {
         Concession concession = new Concession.Builder()
                 .setItemName("Nachos")
                 .setPrice(60.00)
-                .setAvailableQuantity(25)
+                .setQuantityAvailable(25)
                 .build();
 
-        String expected = "Concession{itemName='Nachos', price=60.0, availableQuantity=25}";
+        String expected = "Concession{id='" + concession.getId() + "', itemName='Nachos', price=60.0, quantityAvailable=25}";
         assertEquals(expected, concession.toString());
     }
 }
-

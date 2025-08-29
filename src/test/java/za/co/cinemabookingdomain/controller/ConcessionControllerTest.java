@@ -1,10 +1,10 @@
-package za.co.cinemabookingdomain.Controller;
+package za.co.cinemabookingdomain.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import za.co.cinemabookingdomain.Domain.Concession;
-import za.co.cinemabookingdomain.Service.ConcessionService;
-import za.co.cinemabookingdomain.controller.ConcessionController;
+import org.springframework.http.ResponseEntity;
+import za.co.cinemabookingdomain.domain.Concession;
+import za.co.cinemabookingdomain.service.ConcessionService;
 import za.co.cinemabookingdomain.factory.ConcessionFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,9 +28,10 @@ public class ConcessionControllerTest {
     void testCreateConcession() {
         when(concessionService.create(concession)).thenReturn(concession);
 
-        Concession created = concessionController.create(concession);
-        assertNotNull(created);
-        assertEquals("Popcorn", created.getItemName());
+        ResponseEntity<Concession> response = concessionController.addConcession(concession);
+
+        assertNotNull(response.getBody());
+        assertEquals("Popcorn", response.getBody().getItemName());
         verify(concessionService).create(concession);
     }
 
@@ -38,36 +39,39 @@ public class ConcessionControllerTest {
     void testReadConcession() {
         when(concessionService.read(concession.getId())).thenReturn(concession);
 
-        Concession read = concessionController.read(concession.getId());
-        assertNotNull(read);
-        assertEquals(concession.getId(), read.getId());
+        ResponseEntity<Concession> response = concessionController.getConcessionById(concession.getId());
+
+        assertNotNull(response.getBody());
+        assertEquals(concession.getId(), response.getBody().getId());
         verify(concessionService).read(concession.getId());
     }
 
     @Test
     void testUpdateConcession() {
-        Concession updatedConcession;
-        updatedConcession = new Concession.Builder()
-                .copy(concession)
+        Concession updatedConcession = new Concession.Builder()
+                .setId(concession.getId())  // keep same ID
+                .setItemName(concession.getItemName())
                 .setPrice(6.99)
                 .setQuantityAvailable(120)
                 .build();
 
         when(concessionService.update(updatedConcession)).thenReturn(updatedConcession);
 
-        Concession updated = concessionController.update(updatedConcession);
-        assertNotNull(updated);
-        assertEquals(6.99, updated.getPrice());
-        assertEquals(120, updated.getQuantityAvailable());
+        ResponseEntity<Concession> response = concessionController.updateConcession(updatedConcession.getId(), updatedConcession);
+
+        assertNotNull(response.getBody());
+        assertEquals(6.99, response.getBody().getPrice());
+        assertEquals(120, response.getBody().getQuantityAvailable());
         verify(concessionService).update(updatedConcession);
     }
 
     @Test
     void testDeleteConcession() {
-        when(concessionService.delete(concession.getId())).thenReturn(true);
+        doNothing().when(concessionService).delete(concession.getId());
 
-        boolean deleted = concessionController.delete(concession.getId());
-        assertTrue(deleted);
+        ResponseEntity<Void> response = concessionController.deleteConcession(concession.getId());
+
+        assertEquals(204, response.getStatusCodeValue()); // 204 No Content
         verify(concessionService).delete(concession.getId());
     }
 }

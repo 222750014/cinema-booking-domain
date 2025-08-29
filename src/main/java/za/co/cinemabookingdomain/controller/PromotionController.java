@@ -9,12 +9,11 @@ package za.co.cinemabookingdomain.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import za.co.cinemabookingdomain.Domain.Promotion;
-import za.co.cinemabookingdomain.Service.PromotionService;
+import za.co.cinemabookingdomain.domain.Promotion;
+import za.co.cinemabookingdomain.service.PromotionService;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/promotions")

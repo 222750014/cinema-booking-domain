@@ -1,8 +1,7 @@
 package za.co.cinemabookingdomain.ServiceImpl;
-import org.springframework.stereotype.Service;
-import za.co.cinemabookingdomain.Domain.Screen;
-import za.co.cinemabookingdomain.Repository.ScreenRepository;
-import za.co.cinemabookingdomain.Service.ScreenService;
+import za.co.cinemabookingdomain.domain.Screen;
+import za.co.cinemabookingdomain.repository.ScreenRepository;
+import za.co.cinemabookingdomain.service.ScreenService;
 
 import java.util.List;
 import java.util.Optional;

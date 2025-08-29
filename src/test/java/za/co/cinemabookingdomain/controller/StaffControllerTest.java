@@ -7,8 +7,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import za.co.cinemabookingdomain.Domain.Staff;
-import za.co.cinemabookingdomain.Service.StaffService;
+import za.co.cinemabookingdomain.domain.Staff;
+import za.co.cinemabookingdomain.service.StaffService;
 
 import java.util.Arrays;
 import java.util.Optional;

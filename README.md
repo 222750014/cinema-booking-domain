@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # movie-tickets-app
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -27,3 +28,6 @@ npm run dev
 ```sh
 npm run build
 ```
+=======
+![uml diagram](https://github.com/user-attachments/assets/2f9ef0af-7dd9-4976-bb97-2de9dd33fc3a)
+>>>>>>> 50f5d53e71d46c4799440e6387b15e13eeb7df90

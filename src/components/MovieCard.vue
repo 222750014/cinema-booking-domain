@@ -1,16 +1,10 @@
 <template>
   <div class="movie-card">
-    <div class="movie-poster">
-      <img :src="movie.poster" :alt="movie.title" />
-      <div class="movie-overlay">
-        <div class="movie-rating">{{ movie.rating }}</div>
-      </div>
-    </div>
-    <div class="movie-info">
-      <h4>{{ movie.title }}</h4>
-      <p class="movie-certificate">{{ movie.certificate }}</p>
-      <button @click="buyTickets" class="buy-tickets-btn">Buy Tickets</button>
-    </div>
+
+    <img :src="movie.image" alt="Movie Poster" />
+    <h3>{{ movie.title }}</h3>
+    <p>{{ movie.description }}</p>
+    <button @click="bookMovie">Book</button>
   </div>
 </template>
 
@@ -24,8 +18,9 @@ export default {
     }
   },
   methods: {
-    buyTickets() {
-      this.$router.push(`/seat-selection/${this.movie.id}`)
+    bookMovie() {
+      // Placeholder for booking logic
+      alert(`Booked: ${this.movie.title}`);
     }
   }
 }
@@ -33,71 +28,27 @@ export default {
 
 <style scoped>
 .movie-card {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
 
-.movie-card:hover {
-  transform: translateY(-5px);
-}
-
-.movie-poster {
-  position: relative;
-  height: 300px;
-  overflow: hidden;
-}
-
-.movie-poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.movie-overlay {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.movie-rating {
-  background: rgba(0,0,0,0.7);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 0.8em;
-}
-
-.movie-info {
-  padding: 15px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
   text-align: center;
 }
-
-.movie-info h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.1em;
-}
-
-.movie-certificate {
-  color: #666;
-  font-size: 0.9em;
-  margin: 0 0 15px 0;
-}
-
-.buy-tickets-btn {
-  background: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
+.movie-card img {
   width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
-
-.buy-tickets-btn:hover {
-  background: #555;
+button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #1565c0;
 }
 </style>

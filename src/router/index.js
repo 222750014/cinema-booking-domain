@@ -1,11 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import SeatSelection from '../views/SeatSelection.vue'
-import Movies from '../views/Movies.vue'
+import MoviesPage from '../views/MoviesPage.vue'
 import Cinemas from '../views/Cinemas.vue'
 import Tickets from '../views/Tickets.vue'
+import BookingPage from "@/views/BookingPage.vue";
+import SeatPage from "@/views/SeatPage.vue";
 
 const routes = [
+  {
+    path: '/seat',
+    name: 'seat',
+    component: SeatPage
+  },
+  {
+    path: 'booking',
+    name: 'Booking',
+    component: BookingPage
+  },
   {
     path: '/',
     name: 'Home',
@@ -14,7 +25,7 @@ const routes = [
   {
     path: '/movies',
     name: 'Movies',
-    component: Movies
+    component: MoviesPage
   },
   {
     path: '/cinemas',
@@ -26,12 +37,7 @@ const routes = [
     name: 'Tickets',
     component: Tickets
   },
-  {
-    path: '/seat-selection/:movieId',
-    name: 'SeatSelection',
-    component: SeatSelection,
-    props: true
-  }
+
 ]
 
 const router = createRouter({

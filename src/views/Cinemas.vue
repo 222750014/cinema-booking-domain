@@ -30,11 +30,20 @@
               {{ facility }}
             </span>
           </div>
-          <button class="view-showtimes-btn">View Showtimes</button>
+          <button class="view-showtimes-btn" @click="$router.push('/movies')">View Showtimes</button>
+          <button class="nav-btn" @click="$router.push('/tickets')">Go to Tickets</button>
+          <button class="nav-btn" @click="$router.push('/payment')">Go to Payment</button>
+          <button class="nav-btn" @click="$router.push('/')">Go to Home</button>
         </div>
       </div>
-    </div>
-  </div>
+      <div class="nav-buttons">
+        <button @click="$router.push('/movies')">Movies</button>
+        <button @click="$router.push('/')">Home</button>
+        <button @click="$router.push('/tickets')">Tickets</button>
+        <button @click="$router.push('/payment')">Payment</button>
+      </div>
+        </div>
+      </div>
 </template>
 
 <script>

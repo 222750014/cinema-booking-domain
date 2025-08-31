@@ -27,6 +27,12 @@
             :movie="movie"
         />
       </div>
+      <div class="nav-buttons">
+        <button @click="$router.push('/')">Home</button>
+        <button @click="$router.push('/cinemas')">Cinemas</button>
+        <button @click="$router.push('/tickets')">Tickets</button>
+        <button @click="$router.push('/payment')">Payment</button>
+      </div>
     </div>
   </div>
 </template>
@@ -108,5 +114,11 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

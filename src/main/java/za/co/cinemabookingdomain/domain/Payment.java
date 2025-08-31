@@ -1,15 +1,18 @@
 package za.co.cinemabookingdomain.domain;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalTime;
 
 @Entity
 public class Payment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String paymentId;
+    @Column
     private String paymentMethod;
+    @Column
     private double amount;
+    @Column
     private LocalTime time;
 
     public Payment(){}

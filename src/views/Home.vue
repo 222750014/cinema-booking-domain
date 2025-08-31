@@ -16,17 +16,8 @@
             </div>
           </div>
         </div>
-        
-        <div class="movies-section">
-          <div class="section-tabs">
-            <button 
-              :class="{ active: activeTab === 'showing' }"
-              @click="activeTab = 'showing'"
-              class="tab-btn"
-            >
-              Now Showing
-            </button>
-            <button 
+       Now Showing
+           <button 
               :class="{ active: activeTab === 'coming' }"
               @click="activeTab = 'coming'"
               class="tab-btn"
@@ -68,8 +59,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>

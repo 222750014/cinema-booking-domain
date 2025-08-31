@@ -7,21 +7,14 @@ import za.co.cinemabookingdomain.repository.IConcessionRepository;
 
 import java.util.List;
 
+@Service
 public class ConcessionService implements IConcessionService {
 
-    private static IConcessionService service;
     private final IConcessionRepository repository;
 
-    // Set up a singleton by creating a constructor
-    private ConcessionService() {
+    // Constructor for Spring dependency injection
+    public ConcessionService() {
         repository = ConcessionRepository.getRepository();
-    }
-
-    public static IConcessionService getService() {
-        if (service == null) {
-            service = new ConcessionService();
-        }
-        return service;
     }
 
     @Override
@@ -45,7 +38,7 @@ public class ConcessionService implements IConcessionService {
     }
 
     @Override
-    public void delete(String id) {  // Change to String if the repository requires it
-        this.repository.delete(id); // Ensure this matches the repository method
+    public void delete(String id) {
+        this.repository.delete(id);
     }
 }

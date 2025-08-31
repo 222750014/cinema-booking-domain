@@ -3,129 +3,107 @@ Movie POJO class
 Author: VR Ramncwana (220618534)
 Date: 11 May 2025
  */
+
+
 package za.co.cinemabookingdomain.domain;
 
-public class Movie {
-    private String title;
-    private String genre;
-    private String duration;
-    private String language;
-    private String description;
-    private String releaseDate;
-    private String releaseTime;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "movies")  // Optional: specify table name
+public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "genre")
+    private String genre;
+
+    @Column(name = "duration")
+    private int duration;
+
+    @Column(name = "rating")
+    private String rating;
+
+    @Column(name = "description")
+    private String description;
+
+    // Add other fields as needed
+
+    // Default constructor (required by JPA)
     public Movie() {
     }
 
-    public Movie(MovieBuilder builder) {
-        this.title = builder.title;
-        this.genre = builder.genre;
-        this.duration = builder.duration;
-        this.language = builder.language;
-        this.description = builder.description;
-        this.releaseDate = builder.releaseDate;
-        this.releaseTime = builder.releaseTime;
+    // Constructor with parameters
+    public Movie(String title, String genre, int duration, String rating, String description) {
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+        this.rating = rating;
+        this.description = description;
+    }
+
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getGenre() {
         return genre;
     }
 
-    public String getDuration() {
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getDuration() {
         return duration;
     }
 
-    public String getLanguage() {
-        return language;
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public String getReleaseTime() {
-        return releaseTime;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
         return "Movie{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
-                ", duration='" + duration + '\'' +
-                ", language='" + language + '\'' +
+                ", duration=" + duration +
+                ", rating='" + rating + '\'' +
                 ", description='" + description + '\'' +
-                ", releaseDate='" + releaseDate + '\'' +
-                ", releaseTime='" + releaseTime + '\'' +
                 '}';
-    }
-
-    public static class MovieBuilder {
-        private String title;
-        private String genre;
-        private String duration;
-        private String language;
-        private String description;
-        private String releaseDate;
-        private String releaseTime;
-
-        public MovieBuilder() {
-        }
-
-        public MovieBuilder setTitle(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public MovieBuilder setGenre(String genre) {
-            this.genre = genre;
-            return this;
-        }
-
-        public MovieBuilder setDuration(String duration) {
-            this.duration = duration;
-            return this;
-        }
-
-        public MovieBuilder setLanguage(String language) {
-            this.language = language;
-            return this;
-        }
-
-        public MovieBuilder setDescription(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public MovieBuilder setReleaseDate(String releaseDate) {
-            this.releaseDate = releaseDate;
-            return this;
-        }
-
-        public MovieBuilder setReleaseTime(String releaseTime) {
-            this.releaseTime = releaseTime;
-            return this;
-        }
-
-        public MovieBuilder copy(Movie movie) {
-            this.title = movie.title;
-            this.genre = movie.genre;
-            this.duration = movie.duration;
-            this.language = movie.language;
-            this.description = movie.description;
-            this.releaseDate = movie.releaseDate;
-            this.releaseTime = movie.releaseTime;
-            return this;
-        }
-
-        public Movie build() {return new Movie(this);}
     }
 }

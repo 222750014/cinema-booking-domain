@@ -4,10 +4,11 @@ Author: EP Posholi (222144408)
 Date: 25 May 2025
  */
 
-
 package za.co.cinemabookingdomain.domain;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -25,9 +26,9 @@ public class Customer {
     private String phone;
     private Integer loyaltyPoints;
 
-    // TODO: Uncomment when Booking entity is created by team member
-    // @One-To-Many(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // private List<Booking> bookings = new ArrayList<>();
+    // Relationship with Booking entity
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Booking> bookings = new ArrayList<>();
 
     protected Customer() {}
 
@@ -59,6 +60,10 @@ public class Customer {
         return loyaltyPoints;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
     // Setters (Added for update logic)
     public void setName(String name) {
         this.name = name;
@@ -76,23 +81,18 @@ public class Customer {
         this.loyaltyPoints = loyaltyPoints;
     }
 
-    // TODO: Uncomment when Booking entity is created
-    /*
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
     // Helper methods for managing relationships
     public void addBooking(Booking booking) {
         bookings.add(booking);
-        booking.setCustomer(this);
+        // Note: You'll need to add setCustomer method to Booking class
+        // booking.setCustomer(this);
     }
 
     public void removeBooking(Booking booking) {
         bookings.remove(booking);
-        booking.setCustomer(null);
+        // Note: You'll need to add setCustomer method to Booking class
+        // booking.setCustomer(null);
     }
-    */
 
     public static class Builder {
         private String name;
@@ -133,7 +133,7 @@ public class Customer {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", loyaltyPoints=" + loyaltyPoints +
-                ", bookingsCount=" + 0 +
+                ", bookingsCount=" + bookings.size() +
                 '}';
     }
 }

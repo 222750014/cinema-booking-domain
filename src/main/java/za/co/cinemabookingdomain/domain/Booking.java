@@ -6,8 +6,14 @@ Date: 11 May 2025
 
 package za.co.cinemabookingdomain.domain;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Booking {
-    private Long customerId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String customerName;
     private String bookingDate;
     private String bookingTime;
@@ -16,11 +22,15 @@ public class Booking {
     private String paymentMethod;
     private String status;
 
+    // Relationship with Customer entity
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public Booking() {
     }
 
     public Booking(BookingBuilder builder) {
-        this.customerId = builder.customerId;
         this.customerName = builder.customerName;
         this.bookingDate = builder.bookingDate;
         this.bookingTime = builder.bookingTime;
@@ -30,8 +40,12 @@ public class Booking {
         this.status = builder.status;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Long getCustomerId() {
-        return customerId;
+        return customer != null ? customer.getId() : null;
     }
 
     public String getCustomerName() {
@@ -62,11 +76,23 @@ public class Booking {
         return status;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        if (customer != null) {
+            this.customerName = customer.getName();
+        }
+    }
+
 
     @Override
     public String toString() {
         return "Booking{" +
-                "customerId=" + customerId +
+                "id=" + id +
+                ", customerId=" + getCustomerId() +
                 ", customerName='" + customerName + '\'' +
                 ", bookingDate='" + bookingDate + '\'' +
                 ", bookingTime='" + bookingTime + '\'' +
@@ -76,7 +102,6 @@ public class Booking {
                 ", status='" + status + '\'' +
                 '}';
     }
-
     public static class BookingBuilder {
         private Long customerId;
         private String customerName;
@@ -91,7 +116,7 @@ public class Booking {
         }
 
         public BookingBuilder setCustomerId(Long customerId) {
-            this.customerId = customerId;
+            // This method now does nothing since we use the relationship
             return this;
         }
 
@@ -131,7 +156,6 @@ public class Booking {
         }
 
         public BookingBuilder copy(Booking booking) {
-            this.customerId = booking.customerId;
             this.customerName = booking.customerName;
             this.bookingDate = booking.bookingDate;
             this.bookingTime = booking.bookingTime;
@@ -142,8 +166,8 @@ public class Booking {
             return this;
         }
 
-        public Booking build() {return new Booking(this);}
+        public Booking build() {
+            return new Booking(this);
+        }
     }
-    }
-
-
+}

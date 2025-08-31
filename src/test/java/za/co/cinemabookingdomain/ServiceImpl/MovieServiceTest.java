@@ -9,6 +9,7 @@ import za.co.cinemabookingdomain.factory.MovieFactory;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MovieServiceTest {
@@ -24,16 +25,19 @@ class MovieServiceTest {
     }
 
     @BeforeAll
-    static void setUp(){
-        movie1 = MovieFactory.createMovie("Get Out","Horror","1hr","English","A young African-American visits his girlfriend's parents for the weekend","2017","14:00");
-        movie2 = MovieFactory.createMovie("FURIOSA","Action","2hr 22m","English","Director George Miller tells the story of renegade warrior Furiosa before her encounter with mad max","2024","12:00");
-        movie3 = MovieFactory.createMovie("OBLIVION","Action","1hr 59m","English","A veteran assigned to extract Earth's remaining resources, discovers a crashed spacecraft that will change everything he knew","2013","17:00");}
+    static void setUp() {
+        // Updated to match the fixed MovieFactory (no language, releaseDate, releaseTime)
+        movie1 = MovieFactory.createMovie("Get Out", "Horror", "100", "R", "A young African-American visits his girlfriend's parents for the weekend");
+        movie2 = MovieFactory.createMovie("FURIOSA", "Action", "142", "PG-13", "Director George Miller tells the story of renegade warrior Furiosa before her encounter with Mad Max");
+        movie3 = MovieFactory.createMovie("OBLIVION", "Action", "119", "PG-13", "A veteran assigned to extract Earth's remaining resources discovers a crashed spacecraft that will change everything he knew");
+    }
+
     @Test
     @Order(1)
     void create() {
-        Movie savedMovie = movieService.create(movie1);
-        assertNotNull(savedMovie);
-        System.out.println(savedMovie);
+        Movie savedMovie1 = movieService.create(movie1);
+        assertNotNull(savedMovie1);
+        System.out.println(savedMovie1);
 
         Movie savedMovie2 = movieService.create(movie2);
         assertNotNull(savedMovie2);
@@ -55,13 +59,18 @@ class MovieServiceTest {
     @Test
     @Order(3)
     void update() {
-        Movie movieToUpdate = new Movie.MovieBuilder().copy(movie2).setReleaseTime("20:00").build();
 
-        //from Database
+        Movie movieToUpdate = new Movie(
+                movie2.getTitle(),
+                movie2.getGenre(),
+                movie2.getDuration(),
+                "R",  // Updated rating
+                movie2.getDescription()
+        );
+
         Movie updatedMovie = movieService.update(movieToUpdate);
         assertNotNull(updatedMovie);
         System.out.println(updatedMovie);
-
     }
 
     @Test
@@ -75,7 +84,7 @@ class MovieServiceTest {
     @Test
     @Order(5)
     void getAll() {
-        List<Movie> allMovies=movieService.getAll();
+        List<Movie> allMovies = movieService.getAll();
         assertNotNull(allMovies);
         System.out.println(allMovies);
     }

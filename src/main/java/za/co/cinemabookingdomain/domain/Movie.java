@@ -1,99 +1,62 @@
-/*Movie.java
-Movie POJO class
-Author: VR Ramncwana (220618534)
-Date: 11 May 2025
- */
-
-
 package za.co.cinemabookingdomain.domain;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "movies")  // Optional: specify table name
+@Table(name = "movies")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
     private String title;
-
-    @Column(name = "genre")
     private String genre;
-
-    @Column(name = "duration")
     private int duration;
-
-    @Column(name = "rating")
     private String rating;
-
-    @Column(name = "description")
     private String description;
+    private String releaseYear;
+    private String showTime;
 
-    // Add other fields as needed
-
-    // Default constructor (required by JPA)
+    // Default constructor for JPA
     public Movie() {
     }
 
-    // Constructor with parameters
-    public Movie(String title, String genre, int duration, String rating, String description) {
+    // Constructor with all fields
+    public Movie(String title, String genre, int duration, String rating, String description,
+                 String releaseYear, String showTime) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.rating = rating;
         this.description = description;
+        this.releaseYear = releaseYear;
+        this.showTime = showTime;
     }
 
     // Getters and setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getGenre() { return genre; }
+    public void setGenre(String genre) { this.genre = genre; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public int getDuration() { return duration; }
+    public void setDuration(int duration) { this.duration = duration; }
 
-    public String getGenre() {
-        return genre;
-    }
+    public String getRating() { return rating; }
+    public void setRating(String rating) { this.rating = rating; }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public int getDuration() {
-        return duration;
-    }
+    public String getReleaseYear() { return releaseYear; }
+    public void setReleaseYear(String releaseYear) { this.releaseYear = releaseYear; }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getShowTime() { return showTime; }
+    public void setShowTime(String showTime) { this.showTime = showTime; }
 
     @Override
     public String toString() {
@@ -104,6 +67,8 @@ public class Movie {
                 ", duration=" + duration +
                 ", rating='" + rating + '\'' +
                 ", description='" + description + '\'' +
+                ", releaseYear='" + releaseYear + '\'' +
+                ", showTime='" + showTime + '\'' +
                 '}';
     }
 }

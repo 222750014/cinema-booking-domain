@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MovieServiceTest {
 
-    private MovieService movieService;
+    private final MovieService movieService;
     private static Movie movie1;
     private static Movie movie2;
     private static Movie movie3;
@@ -26,10 +26,24 @@ class MovieServiceTest {
 
     @BeforeAll
     static void setUp() {
-        // Updated to match the fixed MovieFactory (no language, releaseDate, releaseTime)
-        movie1 = MovieFactory.createMovie("Get Out", "Horror", "100", "R", "A young African-American visits his girlfriend's parents for the weekend");
-        movie2 = MovieFactory.createMovie("FURIOSA", "Action", "142", "PG-13", "Director George Miller tells the story of renegade warrior Furiosa before her encounter with Mad Max");
-        movie3 = MovieFactory.createMovie("OBLIVION", "Action", "119", "PG-13", "A veteran assigned to extract Earth's remaining resources discovers a crashed spacecraft that will change everything he knew");
+        // Updated to match the fixed MovieFactory with 7 fields
+        movie1 = MovieFactory.createMovie(
+                "Get Out", "Horror", "100", "R",
+                "A young African-American visits his girlfriend's parents for the weekend",
+                "2017", "14:00"
+        );
+
+        movie2 = MovieFactory.createMovie(
+                "FURIOSA", "Action", "142", "PG-13",
+                "Director George Miller tells the story of renegade warrior Furiosa before her encounter with Mad Max",
+                "2024", "16:30"
+        );
+
+        movie3 = MovieFactory.createMovie(
+                "OBLIVION", "Action", "119", "PG-13",
+                "A veteran assigned to extract Earth's remaining resources discovers a crashed spacecraft that will change everything he knew",
+                "2013", "18:00"
+        );
     }
 
     @Test
@@ -59,17 +73,20 @@ class MovieServiceTest {
     @Test
     @Order(3)
     void update() {
-
+        // Example: updating the rating of FURIOSA
         Movie movieToUpdate = new Movie(
                 movie2.getTitle(),
                 movie2.getGenre(),
                 movie2.getDuration(),
-                "R",  // Updated rating
-                movie2.getDescription()
+                "R", // Updated rating
+                movie2.getDescription(),
+                movie2.getReleaseYear(),
+                movie2.getShowTime()
         );
 
         Movie updatedMovie = movieService.update(movieToUpdate);
         assertNotNull(updatedMovie);
+        assertEquals("R", updatedMovie.getRating());
         System.out.println(updatedMovie);
     }
 

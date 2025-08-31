@@ -1,16 +1,19 @@
-/*CustomerControllerTest.java
-CustomerControllerTest POJO class
-Author: EP Posholi (222144408)
-Date: 25 May 2025
- */
+/* CustomerControllerTest.java
+   CustomerControllerTest POJO class
+   Author: EP Posholi (222144408)
+   Date: 25 May 2025
+*/
 package za.co.cinemabookingdomain.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import za.co.cinemabookingdomain.domain.Customer;
@@ -27,13 +30,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CustomerController.class)
-public class CustomerControllerTest {
+@ExtendWith(MockitoExtension.class)
+class CustomerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     private CustomerService customerService;
+
+    @InjectMocks
+    private CustomerController customerController;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -62,10 +69,8 @@ public class CustomerControllerTest {
 
     @Test
     void shouldGetAllCustomers() throws Exception {
-        // Given
         when(customerService.getAllCustomers()).thenReturn(customerList);
 
-        // When & Then
         mockMvc.perform(get("/api/customers"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -80,11 +85,9 @@ public class CustomerControllerTest {
 
     @Test
     void shouldGetCustomerById_WhenCustomerExists() throws Exception {
-        // Given
         Long customerId = 1L;
         when(customerService.getCustomerById(customerId)).thenReturn(Optional.of(testCustomer));
 
-        // When & Then
         mockMvc.perform(get("/api/customers/{id}", customerId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -98,11 +101,9 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn404_WhenCustomerNotFound() throws Exception {
-        // Given
         Long customerId = 999L;
         when(customerService.getCustomerById(customerId)).thenReturn(Optional.empty());
 
-        // When & Then
         mockMvc.perform(get("/api/customers/{id}", customerId))
                 .andExpect(status().isNotFound());
 
@@ -111,7 +112,6 @@ public class CustomerControllerTest {
 
     @Test
     void shouldCreateCustomer_WhenValidData() throws Exception {
-        // Given
         Customer newCustomer = CustomerFactory.createCustomer(
                 "Sibongile Dlamini",
                 "sibongile.dlamini@outlook.com",
@@ -120,7 +120,6 @@ public class CustomerControllerTest {
         );
         when(customerService.createCustomer(any(Customer.class))).thenReturn(newCustomer);
 
-        // When & Then
         mockMvc.perform(post("/api/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newCustomer)))
@@ -135,7 +134,6 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn400_WhenCreatingCustomerWithDuplicateEmail() throws Exception {
-        // Given
         Customer duplicateCustomer = CustomerFactory.createCustomer(
                 "Thabo Molefe",
                 "tshepo.mthembu@gmail.com",
@@ -145,7 +143,6 @@ public class CustomerControllerTest {
         when(customerService.createCustomer(any(Customer.class)))
                 .thenThrow(new IllegalArgumentException("Email already in use: tshepo.mthembu@gmail.com"));
 
-        // When & Then
         mockMvc.perform(post("/api/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(duplicateCustomer)))
@@ -156,7 +153,6 @@ public class CustomerControllerTest {
 
     @Test
     void shouldUpdateCustomer_WhenValidData() throws Exception {
-        // Given
         Long customerId = 1L;
         Customer updatedCustomer = CustomerFactory.createCustomer(
                 "Tshepo Mthembu",
@@ -167,7 +163,6 @@ public class CustomerControllerTest {
         when(customerService.updateCustomer(eq(customerId), any(Customer.class)))
                 .thenReturn(updatedCustomer);
 
-        // When & Then
         mockMvc.perform(put("/api/customers/{id}", customerId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedCustomer)))
@@ -182,7 +177,6 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn404_WhenUpdatingNonexistentCustomer() throws Exception {
-        // Given
         Long customerId = 999L;
         Customer updateData = CustomerFactory.createCustomer(
                 "Mpho Langa",
@@ -192,7 +186,6 @@ public class CustomerControllerTest {
         );
         when(customerService.updateCustomer(eq(customerId), any(Customer.class)))
                 .thenThrow(new RuntimeException("Customer not found with id " + customerId));
-
 
         mockMvc.perform(put("/api/customers/{id}", customerId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -204,10 +197,8 @@ public class CustomerControllerTest {
 
     @Test
     void shouldDeleteCustomer_WhenCustomerExists() throws Exception {
-
         Long customerId = 1L;
         doNothing().when(customerService).deleteCustomer(customerId);
-
 
         mockMvc.perform(delete("/api/customers/{id}", customerId))
                 .andExpect(status().isNoContent());
@@ -217,11 +208,9 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn404_WhenDeletingNonexistentCustomer() throws Exception {
-
         Long customerId = 999L;
         doThrow(new RuntimeException("Customer not found with id " + customerId))
                 .when(customerService).deleteCustomer(customerId);
-
 
         mockMvc.perform(delete("/api/customers/{id}", customerId))
                 .andExpect(status().isNotFound());
@@ -231,13 +220,10 @@ public class CustomerControllerTest {
 
     @Test
     void shouldGetCustomerByEmail_WhenEmailExists() throws Exception {
-
         String email = "tshepo.mthembu@gmail.com";
         when(customerService.getCustomerByEmail(email)).thenReturn(Optional.of(testCustomer));
 
-
-        mockMvc.perform(get("/api/customers/search/email")
-                        .param("email", email))
+        mockMvc.perform(get("/api/customers/search/email").param("email", email))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name").value("Tshepo Mthembu"))
@@ -248,13 +234,10 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn404_WhenEmailNotFound() throws Exception {
-
         String email = "nonexistent@hotmail.com";
         when(customerService.getCustomerByEmail(email)).thenReturn(Optional.empty());
 
-
-        mockMvc.perform(get("/api/customers/search/email")
-                        .param("email", email))
+        mockMvc.perform(get("/api/customers/search/email").param("email", email))
                 .andExpect(status().isNotFound());
 
         verify(customerService, times(1)).getCustomerByEmail(email);
@@ -262,13 +245,10 @@ public class CustomerControllerTest {
 
     @Test
     void shouldSearchCustomersByName() throws Exception {
-
         String searchName = "Tshepo";
         when(customerService.searchCustomersByName(searchName)).thenReturn(Arrays.asList(testCustomer));
 
-
-        mockMvc.perform(get("/api/customers/search/name")
-                        .param("name", searchName))
+        mockMvc.perform(get("/api/customers/search/name").param("name", searchName))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isArray())
@@ -280,9 +260,7 @@ public class CustomerControllerTest {
 
     @Test
     void shouldGetTopCustomersByLoyaltyPoints() throws Exception {
-
         when(customerService.getTopCustomersByLoyaltyPoints()).thenReturn(customerList);
-
 
         mockMvc.perform(get("/api/customers/top-loyalty"))
                 .andExpect(status().isOk())
@@ -295,11 +273,9 @@ public class CustomerControllerTest {
 
     @Test
     void shouldCountCustomersWithLoyaltyPointsAbove() throws Exception {
-
         Integer points = 150;
         long count = 5L;
         when(customerService.countCustomersWithLoyaltyPointsAbove(points)).thenReturn(count);
-
 
         mockMvc.perform(get("/api/customers/count/loyalty-above")
                         .param("points", points.toString()))
@@ -312,7 +288,6 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn400_WhenInvalidJsonInCreateRequest() throws Exception {
-
         mockMvc.perform(post("/api/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{ \"invalid\": \"value\" }"))
@@ -323,9 +298,7 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn400_WhenMissingRequiredFieldsInCreateRequest() throws Exception {
-
         String invalidCustomerJson = "{\"phone\": \"0712345678\"}";
-
 
         mockMvc.perform(post("/api/customers")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -335,9 +308,7 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn400_WhenNullOrEmptyName() throws Exception {
-
         String invalidCustomerJson = "{\"name\": \"\", \"email\": \"test@test.com\", \"phone\": \"0712345678\"}";
-
 
         mockMvc.perform(post("/api/customers")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -347,9 +318,7 @@ public class CustomerControllerTest {
 
     @Test
     void shouldReturn400_WhenInvalidEmailFormat() throws Exception {
-
         String invalidCustomerJson = "{\"name\": \"Test User\", \"email\": \"invalid-email\", \"phone\": \"0712345678\"}";
-
 
         mockMvc.perform(post("/api/customers")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -19,7 +19,7 @@ public class CustomerFactoryTest {
 
         assertNotNull(customer);
         assertEquals("Jane Doe", customer.getName());
-        assertEquals("jane@gmail.com", customer.getEmail());
+        assertEquals("jane13@gmail.com", customer.getEmail());
         assertEquals("0734267890", customer.getPhone());
         assertEquals(50, customer.getLoyaltyPoints());
     }

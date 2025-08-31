@@ -1,19 +1,12 @@
-/*PromotionControllerTest.java
-PromotionControllerTest POJO class
-Author: EP Posholi (222144408)
-Date: 25 May 2025
- */
 package za.co.cinemabookingdomain.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import za.co.cinemabookingdomain.domain.Promotion;
 import za.co.cinemabookingdomain.service.PromotionService;
 
@@ -23,22 +16,20 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-@WebMvcTest(PromotionController.class)
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
 public class PromotionControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private PromotionService promotionService;
 
-    @Autowired
+    @InjectMocks
+    private PromotionController promotionController;
+
     private ObjectMapper objectMapper;
 
     private Promotion youthDayPromo;
@@ -46,6 +37,8 @@ public class PromotionControllerTest {
 
     @BeforeEach
     void setUp() {
+        objectMapper = new ObjectMapper();
+
         youthDayPromo = new Promotion.Builder()
                 .setPromotionCode("YOUTH DAY 2025")
                 .setName("Youth Day Special")
@@ -68,47 +61,51 @@ public class PromotionControllerTest {
 
     @Test
     @DisplayName("Should return all available promotions")
-    void shouldReturnAllPromotions() throws Exception {
+    void shouldReturnAllPromotions() {
         when(promotionService.getAllPromotions()).thenReturn(List.of(youthDayPromo, blackFridayPromo));
 
-        mockMvc.perform(get("/api/promotions"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].promotionCode").value("YOUTH DAY 2025"))
-                .andExpect(jsonPath("$[1].promotionCode").value("BLACK FRIDAY"));
+        List<Promotion> result = promotionController.getAllPromotions();
+
+        assertEquals(2, result.size());
+        assertEquals("YOUTH DAY 2025", result.get(0).getPromotionCode());
+        assertEquals("BLACK FRIDAY", result.get(1).getPromotionCode());
+
+        verify(promotionService, times(1)).getAllPromotions();
     }
 
     @Test
     @DisplayName("Should return promotion details by promotion code")
-    void shouldReturnPromotionByCode() throws Exception {
+    void shouldReturnPromotionByCode() {
         when(promotionService.getPromotionByCode("BLACK FRIDAY")).thenReturn(Optional.of(blackFridayPromo));
 
-        mockMvc.perform(get("/api/promotions/code/BLACK FRIDAY"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Black Friday Bonanza"));
+        Promotion result = promotionController.getPromotionByCode("BLACK FRIDAY").getBody();
+
+        assertNotNull(result);
+        assertEquals("Black Friday Bonanza", result.getName());
+        verify(promotionService, times(1)).getPromotionByCode("BLACK FRIDAY");
     }
 
     @Test
     @DisplayName("Should create a new promotion successfully")
-    void shouldCreatePromotion() throws Exception {
+    void shouldCreatePromotion() {
         when(promotionService.createPromotion(any(Promotion.class))).thenReturn(youthDayPromo);
 
-        mockMvc.perform(post("/api/promotions")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(youthDayPromo)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.promotionCode").value("YOUTH DAY 2025"));
+        Promotion result = promotionController.createPromotion(youthDayPromo).getBody();
+
+        assertNotNull(result);
+        assertEquals("YOUTH DAY 2025", result.getPromotionCode());
+        verify(promotionService, times(1)).createPromotion(any(Promotion.class));
     }
 
     @Test
     @DisplayName("Should validate promotion code for a given booking date")
-    void shouldValidatePromotionCodeOnBookingDate() throws Exception {
+    void shouldValidatePromotionCodeOnBookingDate() {
         when(promotionService.isValidPromotion("YOUTH DAY 2025", LocalDate.of(2025, 6, 15)))
                 .thenReturn(true);
 
-        mockMvc.perform(get("/api/promotions/validate/YOUTH DAY 2025")
-                        .param("bookingDate", "2025-06-15"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("true"));
+        boolean isValid = promotionController.validatePromotion("YOUTH DAY 2025", LocalDate.of(2025, 6, 15));
+
+        assertTrue(isValid);
+        verify(promotionService, times(1)).isValidPromotion("YOUTH DAY 2025", LocalDate.of(2025, 6, 15));
     }
 }

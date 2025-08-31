@@ -2,7 +2,7 @@
   <div class="movies-page">
     <div class="container">
       <h1>Movies</h1>
-      
+
       <div class="filters">
         <select v-model="selectedGenre" class="filter-select">
           <option value="">All Genres</option>
@@ -11,20 +11,20 @@
           <option value="drama">Drama</option>
           <option value="animation">Animation</option>
         </select>
-        
+
         <select v-model="selectedLanguage" class="filter-select">
           <option value="">All Languages</option>
           <option value="english">English</option>
-          <option value="hindi">Hindi</option>
-          <option value="telugu">Telugu</option>
+          <option value="hindi">Afrikaans</option>
+          <option value="telugu">Zulu</option>
         </select>
       </div>
-      
+
       <div class="movies-grid">
-        <MovieCard 
-          v-for="movie in filteredMovies" 
-          :key="movie.id" 
-          :movie="movie"
+        <MovieCard
+            v-for="movie in filteredMovies"
+            :key="movie.id"
+            :movie="movie"
         />
       </div>
       <div class="nav-buttons">
@@ -39,12 +39,19 @@
 
 <script>
 import { mapState } from 'vuex'
-import MovieCard from '../components/MovieCard.vue'
+import MovieCard from '@/components/MovieCard.vue'
+
+
+
 
 export default {
   name: 'Movies',
   components: {
     MovieCard
+
+
+
+
   },
   data() {
     return {

@@ -13,10 +13,24 @@
       <router-link to="/cinemas" class="nav-item" :class="{ active: $route.name === 'Cinemas' }">
         CINEMAS
       </router-link>
-      <a href="#" class="nav-item">TRAILERS</a>
-      <a href="#" class="nav-item">EVENTS & PROMOS</a>
-      <a href="#" class="nav-item">ADVERTISE WITH US</a>
-      <a href="#" class="nav-item">CONTACT US</a>
+      <router-link to="/payment" class="nav-item" :class="{ active: $route.name === 'Payment' }">
+        PAYMENT
+      </router-link>
+      <router-link to="/trailers" class="nav-item" :class="{ active: $route.name === 'Trailers' }">
+        TRAILERS
+      </router-link>
+      <router-link to="/events-promos" class="nav-item" :class="{ active: $route.name === 'EventsPromos' }">
+        EVENTS & PROMOS
+      </router-link>
+      <router-link to="/advertise" class="nav-item" :class="{ active: $route.name === 'Advertise' }">
+        ADVERTISE WITH US
+      </router-link>
+      <router-link to="/contact" class="nav-item" :class="{ active: $route.name === 'Contact' }">
+        CONTACT US
+      </router-link>
+      <router-link to="/login" class="nav-item login-link" :class="{ active: $route.name === 'Login' }">
+        LOGIN
+      </router-link>
     </div>
   </nav>
 </template>
@@ -52,5 +66,12 @@ export default {
 .nav-item:hover,
 .nav-item.active {
   background: #ff6b35;
+}
+.login-link.active {
+  background: #4CAF50;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 2px 8px rgba(76,175,80,0.2);
 }
 </style>

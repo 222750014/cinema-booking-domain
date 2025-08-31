@@ -1,62 +1,89 @@
 package za.co.cinemabookingdomain.ServiceImpl;
 
-
-import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import za.co.cinemabookingdomain.domain.Payment;
-import za.co.cinemabookingdomain.service.IPaymentService;
-import za.co.cinemabookingdomain.factory.PaymentFactory;
+import za.co.cinemabookingdomain.repository.PaymentRepository;
 
-import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@TestMethodOrder(MethodOrderer.MethodName.class)
-class PaymentServiceImplTest {
+public class PaymentServiceImplTest {
 
+    private PaymentRepository repository;
+    private PaymentServiceImpl service;
 
-    private static IPaymentService service;
-    LocalTime time = LocalTime.of(18, 27);
-    private Payment payment = PaymentFactory.createPayment("12345", "Debitcard", 200.00, time);
-
-    @Test
-    void a_create() {
-        Payment created = service.create(payment);
-        assertNotNull(created);
-        assertEquals("12345", created.getPaymentId());
-        System.out.println(created);
+    @BeforeEach
+    void setUp() {
+        repository = mock(PaymentRepository.class);
+        service = new PaymentServiceImpl(repository);
     }
 
     @Test
-    void b_read() {
-        Payment read = service.read(payment.getPaymentId());
-        assertNotNull(read);
-        assertEquals("12345", read.getPaymentId());
-        System.out.println(read);
+    void testCreate() {
+        Payment payment = new Payment();
+        when(repository.save(payment)).thenReturn(payment);
+
+        Payment result = service.create(payment);
+
+        assertEquals(payment, result);
+        verify(repository).save(payment);
+    }
+
+    @Test
+    void testRead_found() {
+        Payment payment = new Payment();
+        when(repository.findByPaymentId("123")).thenReturn(Optional.of(payment));
+
+        Payment result = service.read("123");
+
+        assertEquals(payment, result);
+        verify(repository).findByPaymentId("123");
     }
 
 
     @Test
-    void c_update() {
-        Payment newPayment = new Payment.Builder().copy(payment).setPaymentId("24689")
-                .build();
-        Payment updated = service.update(newPayment);
-        assertNotNull(updated);
-        assertEquals("24689", updated.getPaymentId());
-        System.out.println(updated);
-    }
+    void testUpdate() {
+        Payment payment = new Payment();
+        when(repository.save(payment)).thenReturn(payment);
 
+        Payment result = service.update(payment);
 
-    @Test
-    void d_delete() {
-        boolean deleted = service.delete(payment.getPaymentId());
-        assertTrue(deleted);
-        System.out.println("Deleted: " + deleted);
+        assertEquals(payment, result);
+        verify(repository).save(payment);
     }
 
     @Test
-    void getAll() {
-        System.out.println(service.getAll());
+    void testDelete_success() {
+        when(repository.existsByPaymentId("123")).thenReturn(true);
+        doNothing().when(repository).deleteByPaymentId("123");
+
+        boolean result = service.delete("123");
+
+        assertTrue(result);
+        verify(repository).existsByPaymentId("123");
+        verify(repository).deleteByPaymentId("123");
+    }
+
+
+
+    @Test
+    void testGetAll() {
+        Payment p1 = new Payment();
+        Payment p2 = new Payment();
+        List<Payment> payments = Arrays.asList(p1, p2);
+
+        when(repository.findAll()).thenReturn(payments);
+
+        List<Payment> result = service.getAll();
+
+        assertEquals(2, result.size());
+        assertTrue(result.contains(p1));
+        assertTrue(result.contains(p2));
+        verify(repository).findAll();
     }
 }

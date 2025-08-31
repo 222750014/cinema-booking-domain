@@ -4,6 +4,12 @@
       <h1>My Tickets</h1>
       
       <div v-if="bookings.length === 0" class="no-bookings">
+        <div class="nav-buttons">
+          <button @click="$router.push('/movies')">Movies</button>
+          <button @click="$router.push('/')">Home</button>
+          <button @click="$router.push('/cinemas')">Cinemas</button>
+          <button @click="$router.push('/payment')">Payment</button>
+        </div>
         <h3>No bookings found</h3>
         <p>You haven't booked any tickets yet.</p>
         <router-link to="/movies" class="browse-movies-btn">
@@ -12,6 +18,12 @@
       </div>
       
       <div v-else class="bookings-list">
+        <div class="nav-buttons">
+          <button @click="$router.push('/movies')">Movies</button>
+          <button @click="$router.push('/')">Home</button>
+          <button @click="$router.push('/cinemas')">Cinemas</button>
+          <button @click="$router.push('/payment')">Payment</button>
+        </div>
         <div 
           v-for="booking in bookings" 
           :key="booking.id"

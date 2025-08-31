@@ -4,6 +4,11 @@ import SeatSelection from '../views/SeatSelection.vue'
 import Movies from '../views/Movies.vue'
 import Cinemas from '../views/Cinemas.vue'
 import Tickets from '../views/Tickets.vue'
+import Payment from '../views/Payment.vue'
+import Login from '../views/Login.vue'
+
+
+
 
 const routes = [
   {
@@ -27,12 +32,23 @@ const routes = [
     component: Tickets
   },
   {
+    path: '/payment',
+    name: 'Payment',
+    component: Payment
+  },
+  {
     path: '/seat-selection/:movieId',
     name: 'SeatSelection',
     component: SeatSelection,
     props: true
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
+   
 
 const router = createRouter({
   history: createWebHistory(),
